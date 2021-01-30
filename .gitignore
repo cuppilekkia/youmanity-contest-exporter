@@ -1,0 +1,6 @@
+.DS*
+
+# contest folders
+*youma*
+
+__pycache__
