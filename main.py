@@ -37,7 +37,7 @@ def copy_photos(subscription):
       pic = sourceFolder + subscription[FIELDS['IMG'+ idx.__str__()]]
       if Path(pic).exists():
         fileExtension = Path(pic).suffix
-        dest = destinationFolder + filename + fileExtension
+        dest = destinationFolder + filename + '-' + idx.__str__() + fileExtension
         try:
           copyfile(pic, dest)
         except:
