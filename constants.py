@@ -13,10 +13,17 @@ FIELDS = {
   'DATE': 'caricamento',
 }
 
-# The folder containing the contest files
-CONTEST_FOLDER = 'youma-contest-2020'
+# CSV delimiter
+CSV_DELIMITER = ';'
+
+# The main folder to work on
+CONTEST_FOLDER = 'youma-contest-2022'
+
+# The inner folder containing the photos
+PHOTOS_FOLDER = 'photos'
+
 # The CSV containing the contest entries
-CSV_FILENAME = 'iscrizioni2020.csv'
+CSV_FILENAME = 'iscrizioni2022.csv'
 
 # The destination of the export
 # NB. will be placed into the contest folder itself

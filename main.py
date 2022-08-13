@@ -30,7 +30,7 @@ def copy_photos(subscription):
   email = subscription[FIELDS['EMAIL']]
   filename = name + '-' + email
   destinationFolder = './'+CONTEST_FOLDER+'/'+DESTINATION_FOLDER+'/'
-  sourceFolder = './'+CONTEST_FOLDER+'/photos/'
+  sourceFolder = './'+CONTEST_FOLDER+'/'+PHOTOS_FOLDER+'/'
 
   for idx in range(1,4):
     if not subscription[FIELDS['IMG'+ idx.__str__()]] == '':
@@ -40,8 +40,9 @@ def copy_photos(subscription):
         dest = destinationFolder + filename + '-' + idx.__str__() + fileExtension
         try:
           copyfile(pic, dest)
-        except:
+        except Exception as e:
           print('Error copying from: %s - to: %s' %(pic, dest))
+          print(e)
   return None
 
 def make_entry(subscription):
@@ -49,14 +50,17 @@ def make_entry(subscription):
   # this will also create the folder if doesn't exist
   """ if not make_summary_txt_file(subscription):
     print('Error TXT: ' + ', '.join(subscription))
- """
+  """
   # copy the contest pics into the same folder
   copy_photos(subscription)
 
 def main():
   # open the contest CSV file
   with open('./' + CONTEST_FOLDER + '/' + CSV_FILENAME, newline='') as subscriptionFile:
-    subscriptionList = csv.DictReader(subscriptionFile)
+    subscriptionList = csv.DictReader(subscriptionFile, delimiter=CSV_DELIMITER)
+
+    # skip headers
+    # next(subscriptionList)
 
     # range over its lines
     for row in subscriptionList:
