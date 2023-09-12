@@ -20,16 +20,16 @@ def make_summary_txt_file(subscription):
   Path(folder).mkdir(parents=True, exist_ok=True)
 
   with open(folder + filename, 'w') as statementFile:
+    if not statementFile:
+      return False
     statementFile.write(make_file_content(content=subscription))
     return True
-  
-  return False
 
 def copy_photos(subscription):
   name = slugify(subscription[FIELDS['NAME']])
   email = subscription[FIELDS['EMAIL']]
   filename = name + '-' + email
-  destinationFolder = './'+CONTEST_FOLDER+'/'+DESTINATION_FOLDER+'/'
+  destinationFolder = './'+CONTEST_FOLDER+'/'+DESTINATION_FOLDER+'/'+name+'/'
   sourceFolder = './'+CONTEST_FOLDER+'/'+PHOTOS_FOLDER+'/'
 
   for idx in range(1,4):
@@ -48,9 +48,9 @@ def copy_photos(subscription):
 def make_entry(subscription):
   # make the folder and the entry text file for the subscription
   # this will also create the folder if doesn't exist
-  """ if not make_summary_txt_file(subscription):
+  if not make_summary_txt_file(subscription):
     print('Error TXT: ' + ', '.join(subscription))
-  """
+
   # copy the contest pics into the same folder
   copy_photos(subscription)
 
